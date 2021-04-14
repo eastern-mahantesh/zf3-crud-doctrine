@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Application\Service;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
@@ -42,10 +45,7 @@ class PostManager
         
         // Add the entity to entity manager.
         $this->entityManager->persist($post);
-        
-        // Add tags to post
-        //$this->addTagsToPost($data['tags'], $post);
-        
+
         // Apply changes to database.
         $this->entityManager->flush();
     }
@@ -58,10 +58,7 @@ class PostManager
         $post->setTitle($data['title']);
         $post->setContent($data['content']);
         $post->setStatus($data['status']);
-        
-        // Add tags to post
-//        $this->addTagsToPost($data['tags'], $post);
-        
+
         // Apply changes to database.
         $this->entityManager->flush();
     }
@@ -80,16 +77,12 @@ class PostManager
         return 'Unknown';
     }
 
-
     /**
      * Removes post and all associated comments.
      */
     public function removePost($post) 
     {
-        // Remove associated comments
-
         $this->entityManager->remove($post);
-        
         $this->entityManager->flush();
     }
 

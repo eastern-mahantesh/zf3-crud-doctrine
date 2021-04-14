@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -42,16 +45,6 @@ class Post
      */
     protected $dateCreated;
     
-
-    /**
-     * Constructor.
-     */
-    public function __construct() 
-    {
-//        $this->comments = new ArrayCollection();
-//        $this->tags = new ArrayCollection();
-    }
-
     /**
      * Returns ID of this post.
      * @return integer
@@ -140,7 +133,6 @@ class Post
     {
         $this->dateCreated = $dateCreated;
     }
-    
 
 }
 

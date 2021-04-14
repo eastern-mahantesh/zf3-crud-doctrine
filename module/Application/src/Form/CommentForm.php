@@ -6,12 +6,11 @@ namespace Application\Form;
 
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
-use Application\Entity\Post;
 
 /**
- * This form is used to collect post data.
+ * This form is used to collect comment data.
  */
-class PostForm extends Form
+class CommentForm extends Form
 {
     /**
      * Constructor.     
@@ -19,7 +18,7 @@ class PostForm extends Form
     public function __construct()
     {
         // Define form name
-        parent::__construct('post-form');
+        parent::__construct('comment-form');
      
         // Set POST method for this form
         $this->setAttribute('method', 'post');
@@ -34,54 +33,36 @@ class PostForm extends Form
      */
     protected function addElements() 
     {
-                
-        // Add "title" field
+        // Add "author" field
         $this->add([        
             'type'  => 'text',
-            'name' => 'title',
+            'name' => 'author',
             'attributes' => [
-                'id' => 'title'
+                'id' => 'author'
             ],
             'options' => [
-                'label' => 'Title',
+                'label' => 'Author',
             ],
         ]);
         
-        // Add "content" field
-        $this->add([
+        // Add "comment" field
+        $this->add([            
             'type'  => 'textarea',
-            'name' => 'content',
-            'attributes' => [                
-                'id' => 'content'
+            'name' => 'comment',
+            'attributes' => [
+                'id' => 'comment'
             ],
             'options' => [
-                'label' => 'Content',
+                'label' => 'Comment',
             ],
         ]);
-        
-
-        // Add "status" field
-        $this->add([
-            'type'  => 'select',
-            'name' => 'status',
-            'attributes' => [                
-                'id' => 'status'
-            ],
-            'options' => [
-                'label' => 'Status',
-                'value_options' => [
-                    Post::STATUS_PUBLISHED => 'Published',
-                    Post::STATUS_DRAFT => 'Draft',
-                ]
-            ],
-        ]);
-        
+                
         // Add the submit button
         $this->add([
             'type'  => 'submit',
             'name' => 'submit',
             'attributes' => [                
-                'value' => 'Create',
+                'value' => 'Save',
                 'id' => 'submitbutton',
             ],
         ]);
@@ -97,26 +78,24 @@ class PostForm extends Form
         $this->setInputFilter($inputFilter);
         
         $inputFilter->add([
-                'name'     => 'title',
+                'name'     => 'author',
                 'required' => true,
-                'filters'  => [
+                'filters'  => [                    
                     ['name' => 'StringTrim'],
-                    ['name' => 'StripTags'],
-                    ['name' => 'StripNewlines'],
                 ],                
                 'validators' => [
                     [
                         'name'    => 'StringLength',
                         'options' => [
                             'min' => 1,
-                            'max' => 1024
+                            'max' => 128
                         ],
                     ],
                 ],
             ]);
         
         $inputFilter->add([
-                'name'     => 'content',
+                'name'     => 'comment',
                 'required' => true,
                 'filters'  => [                    
                     ['name' => 'StripTags'],
@@ -131,7 +110,6 @@ class PostForm extends Form
                     ],
                 ],
             ]);   
-
     }
 }
 

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Application\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;

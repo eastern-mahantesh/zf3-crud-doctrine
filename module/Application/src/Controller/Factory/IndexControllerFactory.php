@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Application\Controller\Factory;
 
 use Interop\Container\ContainerInterface;
