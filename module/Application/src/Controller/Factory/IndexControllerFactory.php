@@ -15,12 +15,16 @@ use Application\Controller\IndexController;
  */
 class IndexControllerFactory implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    /**
+     * @param ContainerInterface $container
+     * @param $requestedName
+     * @param array|null $options
+     * @return IndexController
+     */
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): IndexController
     {
         $entityManager = $container->get('doctrine.entitymanager.orm_default');
         $postManager = $container->get(PostManager::class);
-        
-        // Instantiate the controller and inject dependencies
         return new IndexController($entityManager, $postManager);
     }
 }

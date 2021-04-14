@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 $this->headTitle('Posts');
 
 $this->mainMenu()->setActiveItemId('home');
@@ -21,9 +24,6 @@ $this->pageBreadcrumbs()->setItems([
             <?= $this->escapeHtml($post->getTitle()); ?>
         </a>    
     </h3>
-    
-
-        
 
     <p>    
         <?= $this->escapeHtml($post->getContent()); ?>
@@ -52,9 +52,7 @@ $this->pageBreadcrumbs()->setItems([
                     <span style="font-size:<?= $this->escapeHtml(0.9+$frequency*3) ?>em">
                         <?= $this->escapeHtml($tagName); ?>
                     </span>
-                
-                </a>    
-                    
+                </a>
                 <?php endforeach; ?>
             </div>
         </div>

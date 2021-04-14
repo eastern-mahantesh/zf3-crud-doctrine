@@ -1,13 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 $this->headTitle('New Post');
-
 $this->mainMenu()->setActiveItemId('home');
-
 $this->pageBreadcrumbs()->setItems([
             'Home'=>$this->url('home'),
             'Edit Post'=>$this->url('posts', ['action'=>'edit'])
             ]);
-
 $form = $this->form;
 $form->get('title')->setAttributes([
     'class'=>'form-control', 
@@ -59,4 +59,4 @@ $form->prepare();
         
         <?= $this->form()->closeTag(); ?>
     </div>    
-</div>   
+</div>
