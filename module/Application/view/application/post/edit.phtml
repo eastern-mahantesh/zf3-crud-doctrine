@@ -18,10 +18,6 @@ $form->get('content')->setAttributes([
     'placeholder'=>'Type content here',
     'rows'=>6
     ]);
-$form->get('tags')->setAttributes([
-    'class'=>'form-control', 
-    'placeholder'=>'comma, separated, list, of, tags'
-    ]);
 $form->get('status')->setAttributes([
     'class'=>'form-control'   
     ]);
@@ -53,13 +49,6 @@ $form->prepare();
             <?= $this->formElementErrors($form->get('content')); ?>                  
         </div>
         
-        <div class="form-group">
-            <?= $this->formLabel($form->get('tags')); ?>
-            <?= $this->formElement($form->get('tags')); ?>
-            <?= $this->formElementErrors($form->get('tags')); ?>                  
-            <p class="help-block">Separate tags with comma.</p>
-        </div>
-
         <div class="form-group">
             <?= $this->formLabel($form->get('status')); ?>
             <?= $this->formElement($form->get('status')); ?>

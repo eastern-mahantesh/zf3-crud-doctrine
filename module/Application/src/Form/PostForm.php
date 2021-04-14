@@ -57,18 +57,7 @@ class PostForm extends Form
             ],
         ]);
         
-        // Add "tags" field
-        $this->add([
-            'type'  => 'text',
-            'name' => 'tags',
-            'attributes' => [                
-                'id' => 'tags'
-            ],
-            'options' => [
-                'label' => 'Tags',
-            ],
-        ]);
-        
+
         // Add "status" field
         $this->add([
             'type'  => 'select',
@@ -141,25 +130,7 @@ class PostForm extends Form
                 ],
             ]);   
         
-        $inputFilter->add([
-                'name'     => 'tags',
-                'required' => true,
-                'filters'  => [                    
-                    ['name' => 'StringTrim'],
-                    ['name' => 'StripTags'],
-                    ['name' => 'StripNewlines'],
-                ],                
-                'validators' => [
-                    [
-                        'name'    => 'StringLength',
-                        'options' => [
-                            'min' => 1,
-                            'max' => 1024
-                        ],
-                    ],
-                ],
-            ]);
-            
+
         // We do not validate the 'status' field, because it is enough to use
         // the default validator.
         // https://github.com/olegkrivtsov/using-zf3-book-samples/issues/37

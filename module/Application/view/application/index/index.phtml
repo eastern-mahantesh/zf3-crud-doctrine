@@ -22,18 +22,8 @@ $this->pageBreadcrumbs()->setItems([
         </a>    
     </h3>
     
-    <p>
-        Published: <?= $this->escapeHtml(date('jS \of F Y', strtotime($post->getDateCreated()))); ?> 
-        | Tags: <?= $this->escapeHtml($postManager->convertTagsToString($post)); ?>   
-    </p>    
+
         
-    <p class="comments-header">
-        <?= $this->escapeHtml($postManager->getCommentCountStr($post)); ?> | 
-        <a href="<?= $this->url('posts', ['action'=>'view', 'id'=>$post->getId()],
-                ['fragment'=>'comment']); ?>">
-            Add new comment
-        </a>
-    </p>
 
     <p>    
         <?= $this->escapeHtml($post->getContent()); ?>

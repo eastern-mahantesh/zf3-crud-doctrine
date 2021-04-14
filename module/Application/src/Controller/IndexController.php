@@ -64,13 +64,12 @@ class IndexController extends AbstractActionController
         $paginator->setCurrentPageNumber($page);
                        
         // Get popular tags.
-        $tagCloud = $this->postManager->getTagCloud();
+        //$tagCloud = $this->postManager->getTagCloud();
         
         // Render the view template.
         return new ViewModel([
             'posts' => $paginator,
-            'postManager' => $this->postManager,
-            'tagCloud' => $tagCloud
+            'postManager' => $this->postManager
         ]);
     }
     
