@@ -1,0 +1,40 @@
+<?php
+
+declare(strict_types=1);
+
+$this->headTitle('View Post - ' . $post->getTitle());
+
+$this->mainMenu()->setActiveItemId('home');
+
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home')
+            ]);
+        
+$form = $this->form;
+$form->get('author')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>'Author\'s name'
+    ]);
+$form->get('comment')->setAttributes([
+    'class'=>'form-control',
+    'rows'=>6, 
+    'placeholder'=>'Text'
+    ]);
+$form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
+$form->prepare();        
+?>
+
+<a href="
+    <?= $this->url('posts', ['action'=>'admin']); ?>">
+    &lt;&lt; Back to list of posts
+</a>
+
+<h1>
+    <?= $this->escapeHtml($post->getTitle()); ?>    
+</h1>
+
+<p>    
+    <?= $this->escapeHtml($post->getContent()); ?>
+</p>
+
+

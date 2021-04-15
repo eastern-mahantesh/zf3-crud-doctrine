@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+
+$this->headTitle('About');
+
+$this->mainMenu()->setActiveItemId('about');
+
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home'),
+            'About'=>$this->url('about'),
+            ]);
+
+?>
+
+<h1>About</h1>
+
+<p>
+    Application name: <?= $this->escapeHtml($appName) ?>
+</p>
+
+<p>
+    Application description: <?= $this->escapeHtml($appDescription) ?>
+</p>
+
+
