@@ -6,22 +6,17 @@ namespace Application\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Application\Entity\Post;
+use Application\Repository\Query as RepoQuery;
 
-/**
- * This is the custom repository class for Post entity.
- */
 class PostRepository extends EntityRepository
 {
     /**
-     * Retrieves all published posts in descending date order.
      * @return Query
      */
     public function findPublishedPosts()
     {
         $entityManager = $this->getEntityManager();
-        
         $queryBuilder = $entityManager->createQueryBuilder();
-        
         $queryBuilder->select('p')
             ->from(Post::class, 'p')
             ->where('p.status = ?1')
@@ -32,38 +27,31 @@ class PostRepository extends EntityRepository
     }
     
     /**
-     * Finds all published posts having any tag.
      * @return array
      */
-    public function findPostsHavingAnyTag()
+    public function findPostsHavingAnyTag(): array
     {
         $entityManager = $this->getEntityManager();
-        
         $queryBuilder = $entityManager->createQueryBuilder();
-        
         $queryBuilder->select('p')
             ->from(Post::class, 'p')
             ->join('p.tags', 't')
             ->where('p.status = ?1')
             ->orderBy('p.dateCreated', 'DESC')
             ->setParameter('1', Post::STATUS_PUBLISHED);
-        
         $posts = $queryBuilder->getQuery()->getResult();
         
         return $posts;
     }
-    
+
     /**
-     * Finds all published posts having the given tag.
-     * @param string $tagName Name of the tag.
+     * @param string $tagName
      * @return Query
      */
-    public function findPostsByTag($tagName)
+    public function findPostsByTag(string $tagName): Query
     {
         $entityManager = $this->getEntityManager();
-        
         $queryBuilder = $entityManager->createQueryBuilder();
-        
         $queryBuilder->select('p')
             ->from(Post::class, 'p')
             ->join('p.tags', 't')

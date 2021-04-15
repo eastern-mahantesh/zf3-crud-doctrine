@@ -10,53 +10,45 @@ use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Zend\Paginator\Paginator;
 use Application\Entity\Post;
+use Doctrine\ORM\EntityManager;
+use Application\Service\PostManager;
 
-/**
- * This is the main controller class of the Blog application. The 
- * controller class is used to receive user input,  
- * pass the data to the models and pass the results returned by models to the 
- * view for rendering.
- */
-class IndexController extends AbstractActionController 
+class IndexController extends AbstractActionController
 {
     /**
      * Entity manager.
-     * @var Doctrine\ORM\EntityManager 
+     * @var EntityManager
      */
     private $entityManager;
     
     /**
      * Post manager.
-     * @var Application\Service\PostManager 
+     * @var PostManager
      */
     private $postManager;
-    
+
     /**
-     * Constructor is used for injecting dependencies into the controller.
+     * @param EntityManager $entityManager
+     * @param PostManager $postManager
      */
-    public function __construct($entityManager, $postManager) 
+    public function __construct($entityManager, $postManager)
     {
         $this->entityManager = $entityManager;
         $this->postManager = $postManager;
     }
-    
+
     /**
-     * This is the default "index" action of the controller. It displays the 
-     * Recent Posts page containing the recent blog posts.
+     * @return ViewModel
      */
-    public function indexAction() 
+    public function indexAction(): ViewModel
     {
         $page = $this->params()->fromQuery('page', 1);
         $tagFilter = $this->params()->fromQuery('tag', null);
         
         if ($tagFilter) {
-         
-            // Filter posts by tag
             $query = $this->entityManager->getRepository(Post::class)
                     ->findPostsByTag($tagFilter);
-            
         } else {
-            // Get recent posts
             $query = $this->entityManager->getRepository(Post::class)
                     ->findPublishedPosts();
         }
@@ -66,20 +58,16 @@ class IndexController extends AbstractActionController
         $paginator->setDefaultItemCountPerPage(10);        
         $paginator->setCurrentPageNumber($page);
                        
-        // Get popular tags.
-        //$tagCloud = $this->postManager->getTagCloud();
-        
-        // Render the view template.
         return new ViewModel([
             'posts' => $paginator,
             'postManager' => $this->postManager
         ]);
     }
-    
+
     /**
-     * This action displays the About page.
+     * @return ViewModel
      */
-    public function aboutAction() 
+    public function aboutAction(): ViewModel
     {   
         $appName = 'Blog';
         $appDescription = 'A simple blog application for the Using Zend Framework 3 book';

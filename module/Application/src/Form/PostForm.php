@@ -8,35 +8,19 @@ use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 use Application\Entity\Post;
 
-/**
- * This form is used to collect post data.
- */
 class PostForm extends Form
 {
-    /**
-     * Constructor.     
-     */
     public function __construct()
     {
-        // Define form name
         parent::__construct('post-form');
-     
-        // Set POST method for this form
         $this->setAttribute('method', 'post');
-                
         $this->addElements();
         $this->addInputFilter();  
-        
     }
     
-    /**
-     * This method adds elements to form (input fields and submit button).
-     */
-    protected function addElements() 
+    protected function addElements()
     {
-                
-        // Add "title" field
-        $this->add([        
+        $this->add([
             'type'  => 'text',
             'name' => 'title',
             'attributes' => [
@@ -46,8 +30,7 @@ class PostForm extends Form
                 'label' => 'Title',
             ],
         ]);
-        
-        // Add "content" field
+
         $this->add([
             'type'  => 'textarea',
             'name' => 'content',
@@ -59,8 +42,6 @@ class PostForm extends Form
             ],
         ]);
         
-
-        // Add "status" field
         $this->add([
             'type'  => 'select',
             'name' => 'status',
@@ -76,7 +57,6 @@ class PostForm extends Form
             ],
         ]);
         
-        // Add the submit button
         $this->add([
             'type'  => 'submit',
             'name' => 'submit',
@@ -87,13 +67,9 @@ class PostForm extends Form
         ]);
     }
     
-    /**
-     * This method creates input filter (used for form filtering/validation).
-     */
-    private function addInputFilter() 
+    private function addInputFilter()
     {
-        
-        $inputFilter = new InputFilter();        
+        $inputFilter = new InputFilter();
         $this->setInputFilter($inputFilter);
         
         $inputFilter->add([
@@ -131,7 +107,5 @@ class PostForm extends Form
                     ],
                 ],
             ]);   
-
     }
 }
-

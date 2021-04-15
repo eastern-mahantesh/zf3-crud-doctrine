@@ -3,13 +3,15 @@
 declare(strict_types=1);
 
 namespace Application\Service;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\Persistence\ObjectRepository;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Application\Entity\Post;
 use Application\Entity\Comment;
 use Application\Entity\Tag;
 use Zend\Filter\StaticFilter;
-
+use Doctrine\ORM\EntityManager;
 /**
  * The PostManager service is responsible for adding new posts, updating existing
  * posts, adding tags to post, etc.
@@ -17,57 +19,55 @@ use Zend\Filter\StaticFilter;
 class PostManager
 {
     /**
-     * Entity manager.
-     * @var Doctrine\ORM\EntityManager;
+     * @var EntityManager EntityManager;
      */
     private $entityManager;
     
     /**
-     * Constructor.
+     * @param EntityManager $entityManager
      */
-    public function __construct($entityManager)
+    public function __construct(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
     }
     
     /**
-     * This method adds a new post.
+     * @param array $data
      */
-    public function addNewPost($data) 
+    public function addNewPost(array $data)
     {
-        // Create new Post entity.
         $post = new Post();
         $post->setTitle($data['title']);
         $post->setContent($data['content']);
         $post->setStatus($data['status']);
         $currentDate = date('Y-m-d H:i:s');
         $post->setDateCreated($currentDate);        
-        
-        // Add the entity to entity manager.
         $this->entityManager->persist($post);
 
-        // Apply changes to database.
         $this->entityManager->flush();
     }
-    
+
     /**
+     * @param ObjectRepository|EntityRepository $post
+     * @param array $data
      * This method allows to update data of a single post.
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function updatePost($post, $data) 
+    public function updatePost(EntityRepository $post, array $data)
     {
         $post->setTitle($data['title']);
         $post->setContent($data['content']);
         $post->setStatus($data['status']);
 
-        // Apply changes to database.
         $this->entityManager->flush();
     }
 
-    
     /**
-     * Returns status as a string.
+     * @param ObjectRepository|EntityRepository $post
+     * @return String
      */
-    public function getPostStatusAsString($post) 
+    public function getPostStatusAsString($post): String
     {
         switch ($post->getStatus()) {
             case Post::STATUS_DRAFT: return 'Draft';
@@ -78,15 +78,11 @@ class PostManager
     }
 
     /**
-     * Removes post and all associated comments.
+     * @param ObjectRepository|EntityRepository $post
      */
     public function removePost($post) 
     {
         $this->entityManager->remove($post);
         $this->entityManager->flush();
     }
-
 }
-
-
-

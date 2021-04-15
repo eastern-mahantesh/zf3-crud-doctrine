@@ -8,13 +8,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * This class represents a single post in a blog.
  * @ORM\Entity(repositoryClass="\Application\Repository\PostRepository")
  * @ORM\Table(name="post")
  */
 class Post 
 {
-    // Post status constants.
     const STATUS_DRAFT       = 1; // Draft.
     const STATUS_PUBLISHED   = 2; // Published.
 
@@ -46,7 +44,6 @@ class Post
     protected $dateCreated;
     
     /**
-     * Returns ID of this post.
      * @return integer
      */
     public function getId() 
@@ -55,7 +52,6 @@ class Post
     }
 
     /**
-     * Sets ID of this post.
      * @param int $id
      */
     public function setId($id) 
@@ -64,7 +60,6 @@ class Post
     }
 
     /**
-     * Returns title.
      * @return string
      */
     public function getTitle() 
@@ -73,7 +68,6 @@ class Post
     }
 
     /**
-     * Sets title.
      * @param string $title
      */
     public function setTitle($title) 
@@ -82,7 +76,6 @@ class Post
     }
 
     /**
-     * Returns status.
      * @return integer
      */
     public function getStatus() 
@@ -91,7 +84,6 @@ class Post
     }
 
     /**
-     * Sets status.
      * @param integer $status
      */
     public function setStatus($status) 
@@ -100,7 +92,7 @@ class Post
     }   
     
     /**
-     * Returns post content.
+     * @return string
      */
     public function getContent() 
     {
@@ -108,7 +100,6 @@ class Post
     }
     
     /**
-     * Sets post content.
      * @param type $content
      */
     public function setContent($content) 
@@ -117,7 +108,6 @@ class Post
     }
     
     /**
-     * Returns the date when this post was created.
      * @return string
      */
     public function getDateCreated() 
@@ -126,13 +116,10 @@ class Post
     }
     
     /**
-     * Sets the date when this post was created.
      * @param string $dateCreated
      */
     public function setDateCreated($dateCreated) 
     {
         $this->dateCreated = $dateCreated;
     }
-
 }
-

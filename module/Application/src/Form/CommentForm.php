@@ -7,34 +7,19 @@ namespace Application\Form;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 
-/**
- * This form is used to collect comment data.
- */
 class CommentForm extends Form
 {
-    /**
-     * Constructor.     
-     */
     public function __construct()
     {
-        // Define form name
         parent::__construct('comment-form');
-     
-        // Set POST method for this form
         $this->setAttribute('method', 'post');
-                
         $this->addElements();
         $this->addInputFilter();  
-        
     }
     
-    /**
-     * This method adds elements to form (input fields and submit button).
-     */
-    protected function addElements() 
+    protected function addElements()
     {
-        // Add "author" field
-        $this->add([        
+        $this->add([
             'type'  => 'text',
             'name' => 'author',
             'attributes' => [
@@ -45,8 +30,7 @@ class CommentForm extends Form
             ],
         ]);
         
-        // Add "comment" field
-        $this->add([            
+        $this->add([
             'type'  => 'textarea',
             'name' => 'comment',
             'attributes' => [
@@ -57,7 +41,6 @@ class CommentForm extends Form
             ],
         ]);
                 
-        // Add the submit button
         $this->add([
             'type'  => 'submit',
             'name' => 'submit',
@@ -68,13 +51,9 @@ class CommentForm extends Form
         ]);
     }
     
-    /**
-     * This method creates input filter (used for form filtering/validation).
-     */
-    private function addInputFilter() 
+    private function addInputFilter()
     {
-        
-        $inputFilter = new InputFilter();        
+        $inputFilter = new InputFilter();
         $this->setInputFilter($inputFilter);
         
         $inputFilter->add([
@@ -112,4 +91,3 @@ class CommentForm extends Form
             ]);   
     }
 }
-

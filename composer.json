@@ -37,6 +37,6 @@
         "development-disable": "zf-development-mode disable",
         "development-enable": "zf-development-mode enable",
         "development-status": "zf-development-mode status",
-        "serve": "php -S 0.0.0.0:8184 -t public/ public/index.php"
+        "serve": "php -S 0.0.0.0:8187 -t public/ public/index.php"
     }
 }

@@ -9,10 +9,6 @@ use Zend\ServiceManager\Factory\FactoryInterface;
 use Application\Service\PostManager;
 use Application\Controller\IndexController;
 
-/**
- * This is the factory for IndexController. Its purpose is to instantiate the
- * controller.
- */
 class IndexControllerFactory implements FactoryInterface
 {
     /**
@@ -28,7 +24,3 @@ class IndexControllerFactory implements FactoryInterface
         return new IndexController($entityManager, $postManager);
     }
 }
-
-
-
-

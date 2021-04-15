@@ -25,5 +25,3 @@ class PostControllerFactory implements FactoryInterface
         return new PostController($entityManager, $postManager);
     }
 }
-
-
